@@ -86,15 +86,58 @@ def depthFirstSearch(problem):
     print "Start's successors:", problem.getSuccessors(problem.getStartState())
     """
     "*** YOUR CODE HERE ***"
+    #print "Start:", problem.getStartState()
+    #print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    #print "Start's successors:", problem.getSuccessors(problem.getStartState())
     util.raiseNotDefined()
-
-
+    
 def breadthFirstSearch(problem):
     """
     Search the shallowest nodes in the search tree first.
     DICA: Utilizar util.PriorityQueue
     *** YOUR CODE HERE ***
     """
+    #print "Start:", problem.getStartState()
+    #print "Is the start a goal?", problem.isGoalState(problem.getStartState())
+    #print "Start's successors:", problem.getSuccessors(problem.getStartState())
+    visited = []
+    fringe = []
+    directions = []
+    fringe = [(problem.getStartState(), directions)]
+    
+    while len(fringe) > 0:
+        node = fringe[0]
+        fringe.remove(node)
+        visited.append(node[0])
+        for n in problem.getSuccessors(node[0]):
+            print n
+            if n[0] not in visited:
+                try:
+                    trail = node[1]
+                except Exception:
+                    print 'Vazio'
+                if n[1] == 'South':
+                    trail.append(Directions.SOUTH)
+                    fringeNode = (n[0], trail)
+                    fringe.append(fringeNode)
+                if n[1] == 'North':
+                    trail.append(Directions.NORTH)
+                    fringeNode = (n[0], trail)
+                    fringe.append(fringeNode)
+                if n[1] == 'West':
+                    trail.append(Directions.WEST)
+                    fringeNode = (n[0], trail)
+                    fringe.append(fringeNode)
+                if n[1] == 'East':
+                    trail.append(Directions.EAST)
+                    fringeNode = (n[0], trail)
+                    fringe.append(fringeNode)
+                print trail
+        
+        if problem.isGoalState(node[0]):
+            print node[0]
+            print 'Result: ', node[1]
+            return node[1]
     util.raiseNotDefined()
 
     
