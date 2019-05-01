@@ -110,35 +110,14 @@ def breadthFirstSearch(problem):
         fringe.remove(node)
         visited.append(node[0])
         for n in problem.getSuccessors(node[0]):
-            print n
             if n[0] not in visited:
-                try:
-                    trail = node[1]
-                except Exception:
-                    print 'Vazio'
-                if n[1] == 'South':
-                    trail.append(Directions.SOUTH)
-                    fringeNode = (n[0], trail)
-                    fringe.append(fringeNode)
-                if n[1] == 'North':
-                    trail.append(Directions.NORTH)
-                    fringeNode = (n[0], trail)
-                    fringe.append(fringeNode)
-                if n[1] == 'West':
-                    trail.append(Directions.WEST)
-                    fringeNode = (n[0], trail)
-                    fringe.append(fringeNode)
-                if n[1] == 'East':
-                    trail.append(Directions.EAST)
-                    fringeNode = (n[0], trail)
-                    fringe.append(fringeNode)
-                print trail
+                fringeNode = (n[0], node[1]+[n[1]])
+                fringe.append(fringeNode)
         
         if problem.isGoalState(node[0]):
-            print node[0]
             print 'Result: ', node[1]
             return node[1]
-    util.raiseNotDefined()
+    
 
     
 def uniformCostSearch(problem):
